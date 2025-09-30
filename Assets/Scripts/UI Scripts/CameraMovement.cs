@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 
 public class CameraMovement : MonoBehaviour
 {
@@ -19,8 +18,9 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private bool toggleCameraDragMovement;
     [SerializeField] private bool toggleCameraRotation;
 
-
     private Vector3 newPosition;
+    private bool isCursorSet;
+    private ChangeCursor changeCursorCmp;
     private Vector3 startingMouseDragPosition;
     private Vector3 currentMouseDragPosition;
     private Quaternion newRotation;
@@ -29,6 +29,7 @@ public class CameraMovement : MonoBehaviour
     {
         newPosition = transform.position;
         newRotation = transform.rotation;
+        changeCursorCmp = GetComponent<ChangeCursor>();
     }
 
     void Update()
@@ -41,6 +42,8 @@ public class CameraMovement : MonoBehaviour
 
         cameraTransform.position = Vector3.Lerp(cameraTransform.position, newPosition, Time.deltaTime * cameraMovementSmoothing);
         cameraTransform.rotation = Quaternion.Slerp(cameraTransform.rotation, newRotation, Time.deltaTime * cameraRotationSmoothing);
+
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     private void HandleMouseEdgeMovement()
@@ -48,19 +51,42 @@ public class CameraMovement : MonoBehaviour
         if (Input.mousePosition.x > Screen.width - mouseEdgeMovementThreshhold)
         {
             newPosition += cameraTransform.right * cameraSpeed * Time.deltaTime;
+            changeCursorCmp.ChangeMouseCursor(CursorArrow.RIGHT);
+            isCursorSet = true;
         }
         if (Input.mousePosition.x < mouseEdgeMovementThreshhold)
         {
             newPosition += cameraTransform.right * -cameraSpeed * Time.deltaTime;
+            changeCursorCmp.ChangeMouseCursor(CursorArrow.LEFT);
+            isCursorSet = true;
         }
         if (Input.mousePosition.y > Screen.height - mouseEdgeMovementThreshhold)
         {
             newPosition += cameraTransform.forward * cameraSpeed * Time.deltaTime;
+            changeCursorCmp.ChangeMouseCursor(CursorArrow.UP);
+            isCursorSet = true;
         }
         if (Input.mousePosition.y < mouseEdgeMovementThreshhold)
         {
             newPosition += cameraTransform.forward * -cameraSpeed * Time.deltaTime;
+            changeCursorCmp.ChangeMouseCursor(CursorArrow.DOWN);
+            isCursorSet = true;
         }
+        if (CheckIfMouseIsNotOnEdge() && isCursorSet)
+        {
+            changeCursorCmp.ChangeMouseCursor(CursorArrow.DEFAULT);
+            isCursorSet = false;
+        }
+    }
+
+    private bool CheckIfMouseIsNotOnEdge()
+    {
+        // Checks if the cursor is not on one of the 4 Screen Edges.
+
+        return Input.mousePosition.x < Screen.width - mouseEdgeMovementThreshhold &&
+               Input.mousePosition.x > mouseEdgeMovementThreshhold &&
+               Input.mousePosition.y < Screen.height - mouseEdgeMovementThreshhold &&
+               Input.mousePosition.y > mouseEdgeMovementThreshhold;
     }
 
     private void HandleArrowKeysMovement()

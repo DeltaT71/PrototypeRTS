@@ -15317,8 +15317,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1095382242}
   - component: {fileID: 1095382243}
+  - component: {fileID: 1095382244}
   m_Layer: 0
-  m_Name: Camera Observer
+  m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15353,8 +15354,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 1095382242}
-  cameraSpeed: 0.05
-  cameraSmoothing: 10
+  cameraSpeed: 15
+  cameraMovementSmoothing: 10
+  cameraRotationSmoothing: 10
+  mouseEdgeMovementThreshhold: 10
+  toggleArrowKeysMovement: 1
+  toggleWASDKeysMovement: 0
+  toggleMouseEdgeMovement: 1
+  toggleCameraDragMovement: 0
+  toggleCameraRotation: 1
+--- !u!114 &1095382244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095382241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6854914bc896fb4faa588a1ba8a985f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorUp: {fileID: 2800000, guid: 4864883a250c8c3488a12be2be4de65d, type: 3}
+  cursorDown: {fileID: 2800000, guid: 397176dbd21d46541b611967877a4a86, type: 3}
+  cursorRight: {fileID: 2800000, guid: 00cd1b0cfb35830429c5a488e3cf59e4, type: 3}
+  cursorLeft: {fileID: 2800000, guid: 9dd3fef908591324e834c9d16e07d133, type: 3}
 --- !u!1001 &1095631489
 PrefabInstance:
   m_ObjectHideFlags: 0
