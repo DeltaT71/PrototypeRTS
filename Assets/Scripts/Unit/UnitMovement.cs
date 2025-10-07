@@ -5,6 +5,7 @@ using UnityEngine.AI;
 public class UnitMovement : MonoBehaviour
 {
     private Camera cam;
+    [SerializeField] private float chaseRange;
     public LayerMask ground;
     private NavMeshAgent agent;
     public bool isMoving;
@@ -41,7 +42,10 @@ public class UnitMovement : MonoBehaviour
         if (agent.pathPending) return false;
         if (agent.remainingDistance > agent.stoppingDistance) return false;
         //if (agent.hasPath || agent.velocity.sqrMagnitude != 0f) return false;
-
         return true;
+    }
+    public void ChaseTarget(Vector3 chaseTarget)
+    {
+        agent.SetDestination(chaseTarget);
     }
 }

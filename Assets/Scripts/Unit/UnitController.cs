@@ -1,10 +1,14 @@
 using System;
+using NUnit.Framework;
 using UnityEngine;
 
 public class UnitController : MonoBehaviour
 {
     public UnitBaseState currentState;
+    public bool isCommandedToMove;
+    [NonSerialized] public Transform targetToAttack;
     public UnitIdleState idleState = new UnitIdleState();
+    public UnitChaseState chaseState = new UnitChaseState();
     public UnitMoveState movementState = new UnitMoveState();
     [NonSerialized] public UnitMovement movementCmp;
 
@@ -27,5 +31,20 @@ public class UnitController : MonoBehaviour
     {
         currentState = newState;
         currentState.EnterState(this);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy") && other.transform.parent != transform && targetToAttack == null)
+        {
+            targetToAttack = other.transform;
+        }
+    }
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Enemy") && other.transform.parent != transform && targetToAttack != null)
+        {
+            targetToAttack = null;
+        }
     }
 }

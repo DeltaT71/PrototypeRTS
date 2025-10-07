@@ -15,12 +15,13 @@ public class UnitMoveState : UnitBaseState
         if (SelectionManager.Instance.SelectedUnits.Contains(unit.gameObject) && Input.GetMouseButtonDown(1))
         {
             unit.movementCmp.MoveToPosition();
+            return;
         }
 
         if (unit.movementCmp.ReachedDestination())
         {
-            unit.movementCmp.isMoving = false;
             unit.SwitchState(unit.idleState);
+            return;
         }
     }
 }
