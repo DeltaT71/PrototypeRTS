@@ -97,9 +97,9 @@ GameObject:
   - component: {fileID: 6715707082540765540}
   - component: {fileID: 1133794041844584192}
   - component: {fileID: 4388633992561106654}
+  - component: {fileID: 2930671739270037373}
   - component: {fileID: 817701392011689270}
   - component: {fileID: 8959819693843439741}
-  - component: {fileID: 2930671739270037373}
   m_Layer: 6
   m_Name: Capsule Unit
   m_TagString: Untagged
@@ -166,6 +166,20 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 4
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2930671739270037373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8022885839623990890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba042f0d1f96834794758a56bad98e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isCommandedToMove: 0
+  attackRange: 1
 --- !u!114 &817701392011689270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,15 +210,3 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   isMoving: 0
---- !u!114 &2930671739270037373
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8022885839623990890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ba042f0d1f96834794758a56bad98e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

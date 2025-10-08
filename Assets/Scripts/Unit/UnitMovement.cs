@@ -5,9 +5,10 @@ using UnityEngine.AI;
 public class UnitMovement : MonoBehaviour
 {
     private Camera cam;
-    [SerializeField] private float chaseRange;
-    public LayerMask ground;
+    public LayerMask groundLayer;
+    public LayerMask clickable;
     private NavMeshAgent agent;
+    public GameObject chaseTarget;
     public bool isMoving;
 
     void Awake()
@@ -30,10 +31,21 @@ public class UnitMovement : MonoBehaviour
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, ground))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayer))
         {
             agent.SetDestination(hit.point);
             isMoving = true;
+        }
+
+    }
+    public void SetTargetToChase()
+    {
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, clickable))
+        {
+            chaseTarget = hit.transform.gameObject;
         }
     }
 
@@ -44,8 +56,8 @@ public class UnitMovement : MonoBehaviour
         //if (agent.hasPath || agent.velocity.sqrMagnitude != 0f) return false;
         return true;
     }
-    public void ChaseTarget(Vector3 chaseTarget)
+    public void ChaseTarget(Vector3 target)
     {
-        agent.SetDestination(chaseTarget);
+        agent.SetDestination(target);
     }
 }
