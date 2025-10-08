@@ -14,14 +14,18 @@ public class UnitMoveState : UnitBaseState
     {
         if (SelectionManager.Instance.SelectedUnits.Contains(unit.gameObject) && unit.CheckRightClickGround() && Input.GetMouseButtonDown(1))
         {
-            unit.movementCmp.MoveToPosition();
-            return;
-        }
-        if (SelectionManager.Instance.SelectedUnits.Contains(unit.gameObject) && unit.CheckRightClickEnemy() && Input.GetMouseButtonDown(1))
-        {
-            unit.movementCmp.SetTargetToChase();
-            unit.SwitchState(unit.chaseState);
-            return;
+            if (unit.CheckRightClickEnemy())
+            {
+                unit.movementCmp.SetTargetToChase();
+                unit.SwitchState(unit.chaseState);
+                return;
+            }
+            else
+            {
+                unit.movementCmp.MoveToPosition();
+                return;
+            }
+
         }
 
         if (unit.movementCmp.ReachedDestination())
