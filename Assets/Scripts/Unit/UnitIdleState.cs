@@ -49,6 +49,12 @@ public class UnitIdleState : UnitBaseState
             unit.SwitchState(unit.chaseState);
             return;
         }
+
+        if (unit.movementCmp.chaseTarget != null)
+        {
+            unit.SwitchState(unit.chaseState);
+        }
+
         if (unit.movementCmp.ReachedDestination())
         {
             unit.isCommandedToMove = false;

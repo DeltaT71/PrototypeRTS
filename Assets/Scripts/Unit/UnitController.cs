@@ -94,20 +94,20 @@ public class UnitController : MonoBehaviour
         isCommandedToAttackMove = false;
     }
 
-    public void ChasteTargetCommand()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        Physics.Raycast(ray, out hit, Mathf.Infinity);
+    // public void ChaseTargetCommand()
+    // {
+    //     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+    //     RaycastHit hit;
+    //     Physics.Raycast(ray, out hit, Mathf.Infinity);
 
-        print(hit.transform.gameObject.name);
+    //     print(hit.transform.gameObject.name);
 
-        if (hit.transform.gameObject.CompareTag("Enemy"))
-        {
-            targetToAttack = hit.transform;
-            print(targetToAttack);
-        }
-    }
+    //     if (hit.transform.gameObject.CompareTag("Enemy"))
+    //     {
+    //         targetToAttack = hit.transform;
+    //         print(targetToAttack);
+    //     }
+    // }
 
     void OnTriggerEnter(Collider other)
     {
