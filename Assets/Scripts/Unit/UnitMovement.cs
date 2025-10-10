@@ -38,6 +38,10 @@ public class UnitMovement : MonoBehaviour
         }
 
     }
+    public void StopMovement()
+    {
+        agent.ResetPath();
+    }
     public void SetTargetToChase()
     {
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);

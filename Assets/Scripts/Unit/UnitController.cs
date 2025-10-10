@@ -1,4 +1,5 @@
 using System;
+using UnityEditor;
 using UnityEngine;
 
 public class UnitController : MonoBehaviour
@@ -6,7 +7,10 @@ public class UnitController : MonoBehaviour
     public UnitBaseState currentState;
     public LayerMask groundLayer;
     public LayerMask clickable;
+    public bool cursorAttackIcon;
     public bool isCommandedToMove;
+    public bool isCommandedToHoldPosition;
+    public bool isCommandedToAttackMove;
     public float attackRange;
     [NonSerialized] public Transform targetToAttack;
     public UnitIdleState idleState = new UnitIdleState();
@@ -26,9 +30,25 @@ public class UnitController : MonoBehaviour
     }
     void Update()
     {
+        if (SelectionManager.Instance.SelectedUnits.Count > 0)
+        {
+            CheckMouseHoverOverEnemy();
+        }
+        if (SelectionManager.Instance.SelectedUnits.Contains(gameObject) && Input.GetKeyUp(KeyCode.A))
+        {
+            ToggleAttackMove();
+        }
+        if (SelectionManager.Instance.SelectedUnits.Contains(gameObject) && Input.GetKeyUp(KeyCode.H))
+        {
+            ToggleHoldPosition();
+        }
+        if (SelectionManager.Instance.SelectedUnits.Contains(gameObject) && Input.GetMouseButtonUp(1))
+        {
+            CancellAllUnitCommands();
+        }
+
         currentState.UpdateState(this);
     }
-
     public void SwitchState(UnitBaseState newState)
     {
         currentState = newState;
@@ -43,19 +63,35 @@ public class UnitController : MonoBehaviour
         {
             return true;
         }
-
         return false;
     }
-    public bool CheckRightClickEnemy()
+    public bool CheckMouseHoverOverEnemy()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, Mathf.Infinity, clickable))
         {
+            cursorAttackIcon = true;
             return true;
         }
-
+        cursorAttackIcon = false;
         return false;
+    }
+
+    public void ToggleAttackMove()
+    {
+        isCommandedToAttackMove = true;
+        isCommandedToHoldPosition = false;
+    }
+    private void ToggleHoldPosition()
+    {
+        isCommandedToHoldPosition = true;
+        isCommandedToAttackMove = false;
+    }
+    private void CancellAllUnitCommands()
+    {
+        isCommandedToHoldPosition = false;
+        isCommandedToAttackMove = false;
     }
 
     public void ChasteTargetCommand()

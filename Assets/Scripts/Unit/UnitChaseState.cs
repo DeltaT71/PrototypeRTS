@@ -9,7 +9,7 @@ public class UnitChaseState : UnitBaseState
 
     public override void UpdateState(UnitController unit)
     {
-        if (SelectionManager.Instance.SelectedUnits.Contains(unit.gameObject) && Input.GetMouseButtonDown(1))
+        if (IsUnitSelected(unit) && Input.GetMouseButtonDown(1))
         {
             unit.isCommandedToMove = true;
             unit.movementCmp.chaseTarget = null;
@@ -49,5 +49,8 @@ public class UnitChaseState : UnitBaseState
             return;
         }
     }
-
+    private bool IsUnitSelected(UnitController unit)
+    {
+        return SelectionManager.Instance.SelectedUnits.Contains(unit.gameObject);
+    }
 }
