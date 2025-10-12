@@ -94,21 +94,6 @@ public class UnitController : MonoBehaviour
         isCommandedToAttackMove = false;
     }
 
-    // public void ChaseTargetCommand()
-    // {
-    //     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-    //     RaycastHit hit;
-    //     Physics.Raycast(ray, out hit, Mathf.Infinity);
-
-    //     print(hit.transform.gameObject.name);
-
-    //     if (hit.transform.gameObject.CompareTag("Enemy"))
-    //     {
-    //         targetToAttack = hit.transform;
-    //         print(targetToAttack);
-    //     }
-    // }
-
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy") && other.transform.parent != transform && targetToAttack == null)
@@ -121,6 +106,17 @@ public class UnitController : MonoBehaviour
         if (other.CompareTag("Enemy") && other.transform.parent != transform && targetToAttack != null)
         {
             targetToAttack = null;
+        }
+    }
+
+    void OnDrawGizmos()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundLayer);
+
+        if (Input.GetMouseButtonUp(1))
+        {
+            Gizmos.DrawWireSphere(hit.point, UnitMovement.stoppingRadius);
         }
     }
 

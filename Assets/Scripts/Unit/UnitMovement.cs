@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,6 +11,10 @@ public class UnitMovement : MonoBehaviour
     private NavMeshAgent agent;
     public GameObject chaseTarget;
     public bool isMoving;
+    public static float stoppingRadius;
+    //public float stoppingDistance;
+    public float stoppingRadiusMultiplier;
+    public float initialStoppingRadius;
 
     void Awake()
     {
@@ -55,10 +60,17 @@ public class UnitMovement : MonoBehaviour
 
     public bool ReachedDestination()
     {
-        if (agent.pathPending) return false;
-        if (agent.remainingDistance > agent.stoppingDistance) return false;
-        //if (agent.hasPath || agent.velocity.sqrMagnitude != 0f) return false;
-        return true;
+        //stoppingRadius = Mathf.Sqrt(SelectionManager.Instance.SelectedUnits.Count * stoppingDistance);
+        // if (agent.pathPending) return false;
+        // if (agent.remainingDistance >= agent.stoppingDistance) return false;
+        // if (agent.hasPath || agent.velocity.sqrMagnitude != 0f) return false;
+        // return true;
+        print(agent.hasPath && agent.remainingDistance < stoppingRadius);
+        return agent.hasPath && agent.remainingDistance < stoppingRadius;
+    }
+    public void StoppingRadiusMultiplier()
+    {
+        stoppingRadius += stoppingRadiusMultiplier;
     }
     public void ChaseTarget(Vector3 target)
     {

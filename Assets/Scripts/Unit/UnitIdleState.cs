@@ -5,6 +5,7 @@ public class UnitIdleState : UnitBaseState
     public override void EnterState(UnitController unit)
     {
         unit.movementCmp.isMoving = false;
+        unit.movementCmp.StopMovement();
     }
 
     public override void UpdateState(UnitController unit)
@@ -55,11 +56,12 @@ public class UnitIdleState : UnitBaseState
             unit.SwitchState(unit.chaseState);
         }
 
-        if (unit.movementCmp.ReachedDestination())
-        {
-            unit.isCommandedToMove = false;
-            return;
-        }
+        // if (unit.movementCmp.ReachedDestination())
+        // {
+        //     unit.isCommandedToMove = false;
+        //     unit.movementCmp.StopMovement();
+        //     return;
+        // }
     }
     private bool IsTargetInChaseRange(UnitController unit)
     {

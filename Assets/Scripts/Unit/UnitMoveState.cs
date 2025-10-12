@@ -2,11 +2,14 @@ using UnityEngine;
 
 public class UnitMoveState : UnitBaseState
 {
+    private static float unitReachedDestinationCounter;
     public override void EnterState(UnitController unit)
     {
         if (IsUnitSelected(unit) && unit.CheckRightClickGround() && Input.GetMouseButtonDown(1))
         {
             unit.movementCmp.MoveToPosition();
+            UnitMovement.stoppingRadius = unit.movementCmp.initialStoppingRadius;
+            unitReachedDestinationCounter = 0;
         }
     }
 
@@ -14,6 +17,9 @@ public class UnitMoveState : UnitBaseState
     {
         if (IsUnitSelected(unit) && unit.CheckRightClickGround() && Input.GetMouseButtonDown(1))
         {
+            UnitMovement.stoppingRadius = unit.movementCmp.initialStoppingRadius;
+            unitReachedDestinationCounter = 0;
+
             if (unit.CheckMouseHoverOverEnemy())
             {
                 unit.movementCmp.SetTargetToChase();
@@ -51,6 +57,10 @@ public class UnitMoveState : UnitBaseState
 
         if (unit.movementCmp.ReachedDestination())
         {
+            Debug.Log(unitReachedDestinationCounter);
+            unitReachedDestinationCounter += unit.movementCmp.stoppingRadiusMultiplier;
+            unit.isCommandedToMove = false;
+            UnitMovement.stoppingRadius += unitReachedDestinationCounter;
             unit.SwitchState(unit.idleState);
             return;
         }

@@ -61,6 +61,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -82,6 +84,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -178,7 +181,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ba042f0d1f96834794758a56bad98e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  clickable:
+    serializedVersion: 2
+    m_Bits: 64
+  cursorAttackIcon: 0
   isCommandedToMove: 0
+  isCommandedToHoldPosition: 0
+  isCommandedToAttackMove: 0
   attackRange: 1
 --- !u!114 &817701392011689270
 MonoBehaviour:
@@ -205,8 +217,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be9fe23ea36e02746837ab1015fdd3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaseRange: 4
-  ground:
+  groundLayer:
     serializedVersion: 2
     m_Bits: 128
+  clickable:
+    serializedVersion: 2
+    m_Bits: 64
+  chaseTarget: {fileID: 0}
   isMoving: 0
+  stoppingRadius: 0
+  stoppingRadiusMultiplier: 2
