@@ -2,8 +2,6 @@
 
 *A personal project for exploring and prototyping real-time strategy (RTS) mechanics in Unity.*
 
-![Gameplay GIF](media/preview.gif)
-
 ---
 
 ## 🕹️ About the Project
@@ -31,16 +29,20 @@ Press Play in the Unity Editor
 The camera system is modular — each movement type can be toggled from the Inspector.
 
 1. 🖱️ Scroll drag
+
 ![Mass-Unit-Movement](Assets/Media/Scroll-Camera-Drag.gif)
 
 3. 🧭 Mouse-edge scrolling
+
 ![Mass-Unit-Movement](Assets/Media/Camera-Edge-Movement.gif)
 
-4. ⌨️ Arrow key movement
-5. 🎮 WASD movement
+5. ⌨️ Arrow key movement
+6. 🎮 WASD movement
+
 ![Mass-Unit-Movement](Assets/Media/Arrows-WASD-Camera-Move.gif)
 
-7. 🔁 Camera rotation with Q and E
+8. 🔁 Camera rotation with Q and E
+
 ![Mass-Unit-Movement](Assets/Media/Camera-Rotation.gif)
 
 ### 🧍 Unit AI
@@ -54,6 +56,7 @@ The camera system is modular — each movement type can be toggled from the Insp
 - Basic Commands: Move Attack, Chase target, Attack Enemy
 
 ### 🎯 Selection & Movement
+
 ![Mass-Unit-Movement](Assets/Media/Box-Select.gif)
 ![Mass-Unit-Movement](Assets/Media/Single-Unit-Movement-and-Shift-Select.gif)
 ![Mass-Unit-Movement](Assets/Media/Mass-Unit-Movement.gif)
